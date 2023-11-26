@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"AzureServiceBus/msg"
 	"fmt"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
@@ -36,8 +35,11 @@ var sendCmd = &cobra.Command{
 		// Get the connection string
 		connectionString = config["connectionString"]
 		fmt.Println("service called")
-		client := msg.GetClient(connectionString)
-		msg.SendMsg(message, client)
+
+		var clientInstance = &azclinet{
+			Client: GetClient(connectionString),
+		}
+		clientInstance.SendMsg(message)
 
 		logrus.WithFields(logrus.Fields{
 			"content": message,
