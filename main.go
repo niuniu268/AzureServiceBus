@@ -4,7 +4,7 @@ import (
 	"AzureServiceBus/cmd"
 )
 
-const connectionString = "Endpoint=sb://servicebusniuniu.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=9mG1rYLF68v3kvpFBUitFIi+SGbuQzHD2+ASbF1Fd54="
+//const connectionString = "Endpoint=sb://servicebusniuniu.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=9mG1rYLF68v3kvpFBUitFIi+SGbuQzHD2+ASbF1Fd54="
 
 func main() {
 
