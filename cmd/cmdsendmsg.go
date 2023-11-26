@@ -4,11 +4,13 @@ import (
 	"AzureServiceBus/msg"
 	"fmt"
 	"github.com/spf13/cobra"
+	"gopkg.in/yaml.v3"
+	"io/ioutil"
+	"log"
 )
 
-const connectionString = "Endpoint=sb://servicebusniuniu.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=9mG1rYLF68v3kvpFBUitFIi+SGbuQzHD2+ASbF1Fd54="
-
-var message = ""
+var message string
+var connectionString string
 
 var sendCmd = &cobra.Command{
 	Use:   "send",
@@ -20,6 +22,22 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
+
+		// Read input.yaml
+		yamlData, err := ioutil.ReadFile("config.yaml")
+		if err != nil {
+			log.Fatalf("Error reading input.yaml: %v", err)
+		}
+
+		// Unmarshal YAML data
+		var config map[string]string
+		err = yaml.Unmarshal(yamlData, &config)
+		if err != nil {
+			log.Fatalf("Error unmarshalling YAML: %v", err)
+		}
+
+		// Get the connection string
+		connectionString = config["connectionString"]
 		fmt.Println("service called")
 		client := msg.GetClient(connectionString)
 		msg.SendMsg(message, client)
