@@ -49,4 +49,5 @@ func GetClient(connection string) *azservicebus.Client {
 	}).Info("client information: ")
 
 	return client
+
 }
