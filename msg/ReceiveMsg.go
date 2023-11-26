@@ -8,11 +8,13 @@ import (
 	"log"
 )
 
-func ReceiveMsg(client *azservicebus.Client) {
+func ReceiveMsg(client *azservicebus.Client, count int) {
+
 	receiver, err := client.NewReceiverForQueue("myqueue", nil) //Change myqueue to env var
 	if err != nil {
 		log.Printf("%v", err)
 	}
+
 	defer func(receiver *azservicebus.Receiver, ctx context2.Context) {
 		err := receiver.Close(ctx)
 		if err != nil {
@@ -20,7 +22,7 @@ func ReceiveMsg(client *azservicebus.Client) {
 		}
 	}(receiver, context.TODO())
 
-	messages, err := receiver.ReceiveMessages(context.TODO(), 2, nil)
+	messages, err := receiver.ReceiveMessages(context.TODO(), 5, nil)
 	if err != nil {
 		log.Printf("%v", err)
 	}
@@ -34,4 +36,5 @@ func ReceiveMsg(client *azservicebus.Client) {
 			log.Printf("%v", err)
 		}
 	}
+
 }

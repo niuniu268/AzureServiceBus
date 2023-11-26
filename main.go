@@ -1,15 +1,17 @@
 package main
 
 import (
-	"AzureServiceBus/msg"
+	"AzureServiceBus/cmd"
 )
 
-const connectionString = "Endpoint=sb://servicebusniuniu.servicebus.windows.net/;SharedAccessKeyName=test;SharedAccessKey=zXIhcfVeVr3h+ToeC1GHNV1cNGtQVCRvE+ASbOI91Ks=;EntityPath=myqueue"
+const connectionString = "Endpoint=sb://servicebusniuniu.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=9mG1rYLF68v3kvpFBUitFIi+SGbuQzHD2+ASbF1Fd54="
 
 func main() {
 
-	client := msg.GetClient(connectionString)
-	msg.SendMsg("12345", client)
-	msg.ReceiveMsg(client)
+	//client := msg.GetClient(connectionString)
+	//msg.SendMsg("", client)
+	//msg.ReceiveMsg(client, 5)
+	//msg.GetDeadLetterMessage(client)
 
+	cmd.Execute()
 }
